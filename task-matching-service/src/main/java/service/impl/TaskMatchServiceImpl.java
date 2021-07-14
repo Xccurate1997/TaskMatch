@@ -1,13 +1,13 @@
 package service.impl;
 
 
-import damain.HumanObjInfoDO;
-import damain.TaskObjInfoDO;
+import domain.HumanObjInfoDO;
+import domain.TaskObjInfoDO;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.TaskMatchService;
-import service.TaskObjMapper;
+import service.mapper.TaskObjMapper;
 import service.TaskStatusModifiedService;
 import service.util.TaskComparator;
 

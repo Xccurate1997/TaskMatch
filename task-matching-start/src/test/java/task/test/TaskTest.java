@@ -5,7 +5,8 @@ import com.alibaba.excel.EasyExcel;
 import com.taobao.pandora.boot.test.junit4.DelegateTo;
 import com.taobao.pandora.boot.test.junit4.PandoraBootRunner;
 
-import damain.ExcelTaskDataVO;
+
+import domain.ExcelTaskDataVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;

@@ -1,9 +1,9 @@
 package service.impl;
 
-import damain.TaskObjInfoDO;
+import domain.TaskObjInfoDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import service.TaskObjMapper;
+import service.mapper.TaskObjMapper;
 import service.TaskStatusModifiedService;
 
 import java.util.ArrayList;

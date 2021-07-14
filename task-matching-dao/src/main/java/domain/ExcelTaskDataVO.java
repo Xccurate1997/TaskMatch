@@ -1,4 +1,4 @@
-package damain;
+package domain;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Getter;

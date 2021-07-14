@@ -1,7 +1,7 @@
 package service;
 
-import damain.HumanObjInfoDO;
-import damain.TaskObjInfoDO;
+import domain.HumanObjInfoDO;
+import domain.TaskObjInfoDO;
 
 import java.util.List;
 

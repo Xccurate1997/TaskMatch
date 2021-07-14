@@ -1,6 +1,7 @@
-package service;
+package service.mapper;
 
-import damain.TaskObjInfoDO;
+import domain.TaskObjInfoDO;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ import java.util.List;
  * @author yc.wzl
  * @date 2021/7/14 - 3:36 下午
  */
+
 public interface TaskObjMapper {
     /**
      * 获取所有任务
@@ -32,7 +34,7 @@ public interface TaskObjMapper {
     /**
      * 通过id插入任务数据
      *
-     * @param id
+     * @param taskObjInfoDO
      */
-    void insertTaskById(Integer id);
+    void insertTaskById(TaskObjInfoDO taskObjInfoDO);
 }

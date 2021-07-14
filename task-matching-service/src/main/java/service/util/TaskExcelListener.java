@@ -3,12 +3,12 @@ package service.util;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.taobao.unifiedsession.core.json.JSON;
-import damain.ExcelTaskDataVO;
-import damain.TaskObjInfoDO;
+import domain.ExcelTaskDataVO;
+import domain.TaskObjInfoDO;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import service.ConvertUtil;
-import service.TaskObjMapper;
+import service.mapper.TaskObjMapper;
 
 /**
  * @author yc.wzl
@@ -26,7 +26,7 @@ public class TaskExcelListener extends AnalysisEventListener<ExcelTaskDataVO> {
     public void invoke(ExcelTaskDataVO excelTaskDataVO, AnalysisContext analysisContext) {
         log.info("解析到一条数据:{}", JSON.toJSONString(excelTaskDataVO));
         TaskObjInfoDO taskObjInfoDO = convertUtil.convertToTaskObjInfoDO(excelTaskDataVO);
-        taskObjMapper.insertTaskById(taskObjInfoDO.getId());
+        taskObjMapper.insertTaskById(taskObjInfoDO);
     }
 
     @Override

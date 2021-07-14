@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="service.mapper.TaskObjMapper">
+
+    <!--    List<TaskObjInfoDO> getAllTasks();-->
+    <select id="getAllTasks" resultType="domain.TaskObjInfoDO">
+        select * from task
+    </select>
+    <!--List<TaskObjInfoDO> getTasksByIdList(List<Integer> idList);-->
+    <select id="getTasksByIdList" resultType="domain.TaskObjInfoDO" parameterType="java.util.List">
+        select
+        *
+        from task
+        where id in
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+    <!--void updateTasksByIdList(List<Integer> idList);-->
+    <update id="updateTasksByIdList" parameterType="java.util.List">
+        update
+        task
+        set valid=0
+        where id in
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+
+    <!--void insertTaskById(Integer id);-->
+    <insert id="insertTaskById" parameterType="domain.TaskObjInfoDO">
+        insert into task values (#{id},#{city},#{catalog},#{flagType},#{skill},#{cltTime},#{info},#{valid})
+    </insert>
+</mapper>
