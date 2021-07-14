@@ -37,12 +37,12 @@ public class TaskMatchServiceImpl implements TaskMatchService {
             return new ArrayList<>();
         }
         List<TaskObjInfoDO> taskObjInfoDOList = this.taskGetService.getAllTasks();
-        Set<Integer> skills = getSkills(humanObjInfoDO);
+        Set<String> skills = getSkills(humanObjInfoDO);
         taskObjInfoDOList = this.filterAll(skills, taskObjInfoDOList);
         synchronized (this.getClass()) {
         taskObjInfoDOList = this.taskStatusModifiedService.setTaskValid(taskObjInfoDOList);
         }
-        Map<Integer, Integer> map = getSkillMap(humanObjInfoDO);
+        Map<String, Integer> map = getSkillMap(humanObjInfoDO);
         TaskComparator taskComparator = new TaskComparator(map);
         Collections.sort(taskObjInfoDOList, taskComparator);
         return taskObjInfoDOList;
@@ -54,8 +54,8 @@ public class TaskMatchServiceImpl implements TaskMatchService {
      * @param humanObjInfoDO
      * @return
      */
-    private Map<Integer, Integer> getSkillMap(HumanObjInfoDO humanObjInfoDO) {
-        Map<Integer, Integer> result = new HashMap<>(1024);
+    private Map<String, Integer> getSkillMap(HumanObjInfoDO humanObjInfoDO) {
+        Map<String, Integer> result = new HashMap<>(1024);
         for (HumanObjInfoDO.Skill skill : humanObjInfoDO.getSkills()) {
             result.put(skill.getSkill(), skill.getLevel());
         }
@@ -70,7 +70,7 @@ public class TaskMatchServiceImpl implements TaskMatchService {
      * @param taskObjInfoDOList
      * @return
      */
-    private List<TaskObjInfoDO> filterAll(Set<Integer> skills, List<TaskObjInfoDO> taskObjInfoDOList) {
+    private List<TaskObjInfoDO> filterAll(Set<String> skills, List<TaskObjInfoDO> taskObjInfoDOList) {
         if (CollectionUtils.isEmpty(taskObjInfoDOList)) {
             return new ArrayList<>();
         }
@@ -87,11 +87,11 @@ public class TaskMatchServiceImpl implements TaskMatchService {
      * @param humanObjInfoDO
      * @return
      */
-    private Set<Integer> getSkills(HumanObjInfoDO humanObjInfoDO) {
+    private Set<String> getSkills(HumanObjInfoDO humanObjInfoDO) {
         if (Objects.isNull(humanObjInfoDO)) {
             return new HashSet<>();
         }
-        Set<Integer> result = new HashSet<>();
+        Set<String> result = new HashSet<>();
         List<HumanObjInfoDO.Skill> list = humanObjInfoDO.getSkills();
         for (HumanObjInfoDO.Skill skill : list) {
            result.add(skill.getSkill());

@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Date;
 
 /**
  * 任务属性
@@ -29,22 +28,22 @@ public class TaskObjInfoDO {
     /**
      * 任务产线
      */
-    private Integer catalog;
+    private String catalog;
 
     /**
      * 任务类型
      */
-    private Integer flagType;
+    private String flagType;
 
     /**
      * 需要技能
      */
-    private Integer skill;
+    private String skill;
 
     /**
      * 资料接收时间
      */
-    private Date cltTime;
+    private String cltTime;
 
     /**
      * 资料信息

@@ -17,6 +17,11 @@ import java.util.List;
 @ToString(callSuper = true)
 public class HumanObjInfoDO {
     /**
+     * 姓名
+     */
+    private String name;
+
+    /**
      * 具备技能
      */
     private List<Skill> skills;
@@ -28,7 +33,7 @@ public class HumanObjInfoDO {
         /**
          * 技能类型
          */
-        private Integer skill;
+        private String skill;
 
         /**
          * 掌握程度

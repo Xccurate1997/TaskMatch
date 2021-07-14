@@ -2,7 +2,9 @@ package service.util;
 
 
 import damain.TaskObjInfoDO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import service.ConvertUtil;
 
 import java.util.Comparator;
 import java.util.Map;
@@ -15,6 +17,9 @@ import java.util.Map;
  */
 @Service
 public class TaskComparator implements Comparator<TaskObjInfoDO> {
+    @Autowired
+    private ConvertUtil convertUtil;
+
     private Map<Integer, Integer> map;
 
     public TaskComparator(Map<Integer, Integer> map) {
@@ -36,6 +41,6 @@ public class TaskComparator implements Comparator<TaskObjInfoDO> {
     }
 
     private long getPriorityValue(TaskObjInfoDO taskObjInfoDO) {
-        return taskObjInfoDO.getCltTime().getTime();
+        return convertUtil.convertToDate(taskObjInfoDO.getCltTime()).getTime();
     }
 }
