@@ -20,9 +20,9 @@ public class TaskComparator implements Comparator<TaskObjInfoDO> {
     @Autowired
     private ConvertUtil convertUtil;
 
-    private Map<Integer, Integer> map;
+    private Map<String, Integer> map;
 
-    public TaskComparator(Map<Integer, Integer> map) {
+    public TaskComparator(Map<String, Integer> map) {
         this.map = map;
     }
     @Override

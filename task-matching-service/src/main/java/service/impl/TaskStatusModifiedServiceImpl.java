@@ -3,9 +3,8 @@ package service.impl;
 import damain.TaskObjInfoDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import service.TaskGetService;
+import service.TaskObjMapper;
 import service.TaskStatusModifiedService;
-import service.TaskUpdateService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +16,9 @@ import java.util.stream.Collectors;
  */
 @Service
 public class TaskStatusModifiedServiceImpl implements TaskStatusModifiedService {
-    @Autowired
-    private TaskUpdateService taskUpdateService;
 
     @Autowired
-    private TaskGetService taskGetService;
+    private TaskObjMapper taskObjMapper;
 
     private static final Integer VALID_SIGN = 1;
 
@@ -31,8 +28,8 @@ public class TaskStatusModifiedServiceImpl implements TaskStatusModifiedService 
         for (TaskObjInfoDO r : taskObjInfoDOList) {
             idList.add(r.getId());
         }
-        taskObjInfoDOList = taskGetService.getTasksById(idList);
-        taskUpdateService.updateTasksByIdList(idList);
+        taskObjInfoDOList = taskObjMapper.getTasksByIdList(idList);
+        taskObjMapper.updateTasksByIdList(idList);
         List<TaskObjInfoDO> result = taskObjInfoDOList.parallelStream()
                 .filter(taskObjInfoDO -> VALID_SIGN.equals(taskObjInfoDO.getValid()))
                 .collect(Collectors.toList());

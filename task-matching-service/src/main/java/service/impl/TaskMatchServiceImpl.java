@@ -6,8 +6,8 @@ import damain.TaskObjInfoDO;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import service.TaskGetService;
 import service.TaskMatchService;
+import service.TaskObjMapper;
 import service.TaskStatusModifiedService;
 import service.util.TaskComparator;
 
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Service
 public class TaskMatchServiceImpl implements TaskMatchService {
     @Autowired
-    private TaskGetService taskGetService;
+    private TaskObjMapper taskObjMapper;
 
     @Autowired
     private TaskStatusModifiedService taskStatusModifiedService;
@@ -36,7 +36,7 @@ public class TaskMatchServiceImpl implements TaskMatchService {
         if (CollectionUtils.isEmpty(humanObjInfoDO.getSkills())) {
             return new ArrayList<>();
         }
-        List<TaskObjInfoDO> taskObjInfoDOList = this.taskGetService.getAllTasks();
+        List<TaskObjInfoDO> taskObjInfoDOList = this.taskObjMapper.getAllTasks();
         Set<String> skills = getSkills(humanObjInfoDO);
         taskObjInfoDOList = this.filterAll(skills, taskObjInfoDOList);
         synchronized (this.getClass()) {
@@ -55,7 +55,7 @@ public class TaskMatchServiceImpl implements TaskMatchService {
      * @return
      */
     private Map<String, Integer> getSkillMap(HumanObjInfoDO humanObjInfoDO) {
-        Map<String, Integer> result = new HashMap<>(1024);
+        Map<String, Integer> result = new HashMap<>(32);
         for (HumanObjInfoDO.Skill skill : humanObjInfoDO.getSkills()) {
             result.put(skill.getSkill(), skill.getLevel());
         }
