@@ -33,15 +33,4 @@ public class ConvertUtilImpl implements ConvertUtil {
         return taskObjInfoDO;
     }
 
-    @Override
-    public Date convertToDate(String string) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS");
-        try {
-            Date date = format.parse(string);
-            return date;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }

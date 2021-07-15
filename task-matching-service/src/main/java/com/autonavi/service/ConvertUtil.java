@@ -3,7 +3,6 @@ package com.autonavi.service;
 import com.autonavi.domain.ExcelTaskDataVO;
 import com.autonavi.domain.TaskObjInfoDO;
 
-import java.util.Date;
 
 /**
  * 转换数据类型
@@ -20,5 +19,4 @@ public interface ConvertUtil {
      */
     TaskObjInfoDO convertToTaskObjInfoDO(ExcelTaskDataVO excelTaskDataVO);
 
-    Date convertToDate(String string);
 }

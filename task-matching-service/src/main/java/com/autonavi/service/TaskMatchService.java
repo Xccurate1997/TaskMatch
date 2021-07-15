@@ -15,5 +15,5 @@ public interface TaskMatchService {
      * @param humanObjInfoDO
      * @return
      */
-    public List<TaskObjInfoDO> match(HumanObjInfoDO humanObjInfoDO);
+    List<TaskObjInfoDO> match(HumanObjInfoDO humanObjInfoDO);
 }
