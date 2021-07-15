@@ -2,8 +2,6 @@ package com.autonavi.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-
 
 /**
  * 任务属性
@@ -60,8 +58,6 @@ public class TaskObjInfoDO {
         return "TaskObjInfoDO{" +
                 "id=" + id +
                 ", skill='" + skill + '\'' +
-                ", cltTime='" + cltTime + '\'' +
-                ", valid=" + valid +
                 '}';
     }
 }

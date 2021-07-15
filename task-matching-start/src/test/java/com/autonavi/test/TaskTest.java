@@ -49,6 +49,18 @@ public class TaskTest {
     TaskMatchService taskMatchService;
 
     @Test
+    public void noneTest() {
+        HumanObjInfoDO h1 = new HumanObjInfoDO();
+        List<TaskObjInfoDO> result1 = taskMatchService.match(h1);
+        HumanObjInfoDO h2 = new HumanObjInfoDO();
+        List<HumanObjInfoDO.Skill> skillList = new ArrayList<>();
+        h2.setSkills(skillList);
+        List<TaskObjInfoDO> result2 = taskMatchService.match(h2);
+        System.out.println("h1领到到任务："+result1);
+        System.out.println("h2领到到任务："+result2);
+    }
+
+    @Test
     public void multiHumanTest() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(5);
         CyclicBarrier cyclicBarrier = new CyclicBarrier(5);

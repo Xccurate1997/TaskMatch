@@ -35,8 +35,9 @@ public class TaskStatusModifiedServiceImpl implements TaskStatusModifiedService 
                 if (VALID_SIGN.equals(task.getValid())) {
                     result.add(task);
                     taskObjService.updateTaskById(id);
+                    //为了展示效果！
                     try {
-                        Thread.sleep(300);
+                        Thread.sleep(200);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
