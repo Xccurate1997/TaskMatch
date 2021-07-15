@@ -32,15 +32,11 @@ public class TaskComparator implements Comparator<TaskObjInfoDO> {
         } else if (map.get(t1.getSkill()) < map.get(t2.getSkill())) {
             return 1;
         } else {
-            if (this.getPriorityValue(t1) < this.getPriorityValue(t2)) {
+            if (t1.getId() > t2.getId()) {
                 return -1;
             } else {
                 return 1;
             }
         }
-    }
-
-    private long getPriorityValue(TaskObjInfoDO taskObjInfoDO) {
-        return convertUtil.convertToDate(taskObjInfoDO.getCltTime()).getTime();
     }
 }

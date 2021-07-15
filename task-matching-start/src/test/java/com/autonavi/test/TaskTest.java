@@ -3,8 +3,10 @@ package com.autonavi.test;
 
 import com.alibaba.excel.EasyExcel;
 import com.autonavi.Application;
+import com.autonavi.domain.HumanObjInfoDO;
 import com.autonavi.domain.TaskObjInfoDO;
 import com.autonavi.service.ConvertUtil;
+import com.autonavi.service.TaskMatchService;
 import com.autonavi.service.TaskObjService;
 import com.autonavi.service.util.ConvertUtilImpl;
 import com.taobao.pandora.boot.test.junit4.DelegateTo;
@@ -42,6 +44,25 @@ public class TaskTest {
     @Autowired
     DataSource dataSource;
 
+    @Autowired
+    TaskMatchService taskMatchService;
+
+    @Test
+    public void singleHumanTest() {
+        HumanObjInfoDO h1 = new HumanObjInfoDO();
+        h1.setName("张三");
+        HumanObjInfoDO.Skill h1Skill = new HumanObjInfoDO.Skill();
+        h1Skill.setSkill("电子眼校正（特殊场景）");
+        h1Skill.setLevel(1);
+        List<HumanObjInfoDO.Skill> skillList = new ArrayList<>();
+        skillList.add(h1Skill);
+        h1.setSkills(skillList);
+        List<TaskObjInfoDO> result = taskMatchService.match(h1);
+        for (TaskObjInfoDO r : result) {
+            System.out.println(r);
+        }
+    }
+
     @Test
     public void readTest() {
         String fileName = "任务数据样例.xlsx";
@@ -74,4 +95,20 @@ public class TaskTest {
         }
     }
 
+    @Test
+    public void selectAllTest() {
+        List<TaskObjInfoDO> result = taskObjService.getAllTasks();
+        for (TaskObjInfoDO r : result) {
+            System.out.println(r);
+        }
+    }
+
+    @Test
+    public void updateTest() {
+        List<Integer> idList = new ArrayList<>();
+        idList.add(1);
+        idList.add(2);
+        idList.add(3);
+        taskObjService.updateTasksByIdList(idList);
+    }
 }
