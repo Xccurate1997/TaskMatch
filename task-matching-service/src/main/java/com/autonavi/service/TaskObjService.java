@@ -20,8 +20,16 @@ public class TaskObjService {
         return taskObjMapper.getAllTasks();
     }
 
+    public TaskObjInfoDO getTaskById(Integer id) {
+        return taskObjMapper.getTaskById(id);
+    }
+
     public List<TaskObjInfoDO> getTasksByIdList(List<Integer> idList) {
         return taskObjMapper.getTasksByIdList(idList);
+    }
+
+    public void updateTaskById(Integer id) {
+        taskObjMapper.updateTaskById(id);
     }
 
     public void updateTasksByIdList(List<Integer> idList) {

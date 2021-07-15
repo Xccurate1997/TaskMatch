@@ -34,15 +34,13 @@ public class TaskMatchServiceImpl implements TaskMatchService {
         if (Objects.isNull(humanObjInfoDO)) {
             return null;
         }
-        if (CollectionUtils.isEmpty(humanObjInfoDO.getSkills())) {
+        if (Objects.isNull(humanObjInfoDO.getSkills()) || CollectionUtils.isEmpty(humanObjInfoDO.getSkills())) {
             return new ArrayList<>();
         }
         List<TaskObjInfoDO> taskObjInfoDOList = this.taskObjService.getAllTasks();
         Set<String> skills = getSkills(humanObjInfoDO);
         taskObjInfoDOList = this.filterAll(skills, taskObjInfoDOList);
-        synchronized (this.getClass()) {
         taskObjInfoDOList = this.taskStatusModifiedService.setTaskValid(taskObjInfoDOList);
-        }
         Map<String, Integer> map = getSkillMap(humanObjInfoDO);
         TaskComparator taskComparator = new TaskComparator(map);
         Collections.sort(taskObjInfoDOList, taskComparator);

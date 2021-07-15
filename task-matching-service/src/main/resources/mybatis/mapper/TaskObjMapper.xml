@@ -8,6 +8,12 @@
     <select id="getAllTasks" resultType="com.autonavi.domain.TaskObjInfoDO">
         select * from task
     </select>
+
+    <!--TaskObjInfoDO getTaskById(Integer id);-->
+    <select id="getTaskById" resultType="com.autonavi.domain.TaskObjInfoDO" parameterType="java.lang.Integer">
+        select * from task where id = #{id}
+    </select>
+
     <!--List<TaskObjInfoDO> getTasksByIdList(List<Integer> idList);-->
     <select id="getTasksByIdList" resultType="com.autonavi.domain.TaskObjInfoDO" parameterType="java.util.List">
         select
@@ -19,11 +25,16 @@
         </foreach>
     </select>
 
+    <!--void updateTaskById(Integer id);-->
+    <update id="updateTaskById" parameterType="java.lang.Integer">
+        update task set valid = 0 where id = #{id}
+    </update>
+
     <!--void updateTasksByIdList(List<Integer> idList);-->
     <update id="updateTasksByIdList" parameterType="java.util.List">
         update
         task
-        set valid=0
+        set valid = 0
         where id in
         <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
             #{id}

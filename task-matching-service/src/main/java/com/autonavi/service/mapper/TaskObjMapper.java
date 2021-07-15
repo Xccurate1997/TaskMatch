@@ -18,11 +18,24 @@ public interface TaskObjMapper {
     List<TaskObjInfoDO> getAllTasks();
 
     /**
+     * 根据id获取任务
+     * @param id
+     * @return
+     */
+    TaskObjInfoDO getTaskById(Integer id);
+
+    /**
      * 根据id集合获取任务
      * @param idList
      * @return
      */
     List<TaskObjInfoDO> getTasksByIdList(List<Integer> idList);
+
+    /**
+     * 通过id修改任务属性
+     * @param id
+     */
+    void updateTaskById(Integer id);
 
     /**
      * 通过id集合修改任务属性

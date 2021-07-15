@@ -13,7 +13,6 @@ import lombok.ToString;
  */
 @Getter
 @Setter
-@ToString(callSuper = true)
 public class TaskObjInfoDO {
     /**
      * 任务id
@@ -56,4 +55,13 @@ public class TaskObjInfoDO {
      */
     private Integer valid;
 
+    @Override
+    public String toString() {
+        return "TaskObjInfoDO{" +
+                "id=" + id +
+                ", skill='" + skill + '\'' +
+                ", cltTime='" + cltTime + '\'' +
+                ", valid=" + valid +
+                '}';
+    }
 }

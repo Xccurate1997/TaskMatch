@@ -28,11 +28,21 @@ public class TaskStatusModifiedServiceImpl implements TaskStatusModifiedService 
         for (TaskObjInfoDO r : taskObjInfoDOList) {
             idList.add(r.getId());
         }
-        taskObjInfoDOList = taskObjService.getTasksByIdList(idList);
-        List<TaskObjInfoDO> result = taskObjInfoDOList.parallelStream()
-                .filter(taskObjInfoDO -> VALID_SIGN.equals(taskObjInfoDO.getValid()))
-                .collect(Collectors.toList());
-        taskObjService.updateTasksByIdList(idList);
+        List<TaskObjInfoDO> result = new ArrayList<>();
+        for (Integer id : idList) {
+            synchronized (this.getClass()) {
+                TaskObjInfoDO task = taskObjService.getTaskById(id);
+                if (VALID_SIGN.equals(task.getValid())) {
+                    result.add(task);
+                    taskObjService.updateTaskById(id);
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
         return result;
     }
 }
