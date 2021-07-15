@@ -1,4 +1,4 @@
-package com.autonavi.service.mapper;
+package com.autonavi.mapper;
 
 import com.autonavi.domain.TaskObjInfoDO;
 import org.apache.ibatis.annotations.Mapper;

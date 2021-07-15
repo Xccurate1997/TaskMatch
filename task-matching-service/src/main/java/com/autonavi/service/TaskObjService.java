@@ -1,6 +1,6 @@
 package com.autonavi.service;
 
-import com.autonavi.service.mapper.TaskObjMapper;
+import com.autonavi.mapper.TaskObjMapper;
 import com.autonavi.domain.TaskObjInfoDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
