@@ -1,10 +1,10 @@
-package service.impl;
+package com.autonavi.service.impl;
 
-import domain.TaskObjInfoDO;
+import com.autonavi.domain.TaskObjInfoDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import service.mapper.TaskObjMapper;
-import service.TaskStatusModifiedService;
+import com.autonavi.service.TaskObjService;
+import com.autonavi.service.TaskStatusModifiedService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class TaskStatusModifiedServiceImpl implements TaskStatusModifiedService {
 
     @Autowired
-    private TaskObjMapper taskObjMapper;
+    private TaskObjService taskObjService;
 
     private static final Integer VALID_SIGN = 1;
 
@@ -28,11 +28,11 @@ public class TaskStatusModifiedServiceImpl implements TaskStatusModifiedService 
         for (TaskObjInfoDO r : taskObjInfoDOList) {
             idList.add(r.getId());
         }
-        taskObjInfoDOList = taskObjMapper.getTasksByIdList(idList);
-        taskObjMapper.updateTasksByIdList(idList);
+        taskObjInfoDOList = taskObjService.getTasksByIdList(idList);
         List<TaskObjInfoDO> result = taskObjInfoDOList.parallelStream()
                 .filter(taskObjInfoDO -> VALID_SIGN.equals(taskObjInfoDO.getValid()))
                 .collect(Collectors.toList());
+        taskObjService.updateTasksByIdList(idList);
         return result;
     }
 }

@@ -1,7 +1,7 @@
-package service;
+package com.autonavi.service;
 
-import domain.HumanObjInfoDO;
-import domain.TaskObjInfoDO;
+import com.autonavi.domain.HumanObjInfoDO;
+import com.autonavi.domain.TaskObjInfoDO;
 
 import java.util.List;
 

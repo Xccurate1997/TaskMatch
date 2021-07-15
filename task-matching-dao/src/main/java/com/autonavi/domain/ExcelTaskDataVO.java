@@ -1,4 +1,4 @@
-package domain;
+package com.autonavi.domain;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Getter;

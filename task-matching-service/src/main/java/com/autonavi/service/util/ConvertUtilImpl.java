@@ -1,8 +1,9 @@
-package service.util;
+package com.autonavi.service.util;
 
-import domain.ExcelTaskDataVO;
-import domain.TaskObjInfoDO;
-import service.ConvertUtil;
+import com.autonavi.service.ConvertUtil;
+import com.autonavi.domain.ExcelTaskDataVO;
+import com.autonavi.domain.TaskObjInfoDO;
+import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,6 +14,7 @@ import java.util.Objects;
  * @author yc.wzl
  * @date 2021/7/14 - 2:49 下午
  */
+@Service
 public class ConvertUtilImpl implements ConvertUtil {
     @Override
     public TaskObjInfoDO convertToTaskObjInfoDO(final ExcelTaskDataVO excelTaskDataVO) {

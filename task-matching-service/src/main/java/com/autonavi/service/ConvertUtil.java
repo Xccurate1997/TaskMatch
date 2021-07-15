@@ -1,7 +1,7 @@
-package service;
+package com.autonavi.service;
 
-import domain.ExcelTaskDataVO;
-import domain.TaskObjInfoDO;
+import com.autonavi.domain.ExcelTaskDataVO;
+import com.autonavi.domain.TaskObjInfoDO;
 
 import java.util.Date;
 

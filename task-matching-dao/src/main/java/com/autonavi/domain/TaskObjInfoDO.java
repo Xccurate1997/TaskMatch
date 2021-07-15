@@ -1,4 +1,4 @@
-package domain;
+package com.autonavi.domain;
 
 import lombok.Getter;
 import lombok.Setter;

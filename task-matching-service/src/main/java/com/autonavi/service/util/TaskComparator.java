@@ -1,10 +1,10 @@
-package service.util;
+package com.autonavi.service.util;
 
 
-import domain.TaskObjInfoDO;
+import com.autonavi.service.ConvertUtil;
+import com.autonavi.domain.TaskObjInfoDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import service.ConvertUtil;
 
 import java.util.Comparator;
 import java.util.Map;

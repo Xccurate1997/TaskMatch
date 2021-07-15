@@ -1,15 +1,15 @@
-package service.impl;
+package com.autonavi.service.impl;
 
 
-import domain.HumanObjInfoDO;
-import domain.TaskObjInfoDO;
+import com.autonavi.domain.HumanObjInfoDO;
+import com.autonavi.domain.TaskObjInfoDO;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import service.TaskMatchService;
-import service.mapper.TaskObjMapper;
-import service.TaskStatusModifiedService;
-import service.util.TaskComparator;
+import com.autonavi.service.TaskMatchService;
+import com.autonavi.service.TaskObjService;
+import com.autonavi.service.TaskStatusModifiedService;
+import com.autonavi.service.util.TaskComparator;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,8 +20,9 @@ import java.util.stream.Collectors;
  */
 @Service
 public class TaskMatchServiceImpl implements TaskMatchService {
+
     @Autowired
-    private TaskObjMapper taskObjMapper;
+    private TaskObjService taskObjService;
 
     @Autowired
     private TaskStatusModifiedService taskStatusModifiedService;
@@ -36,7 +37,7 @@ public class TaskMatchServiceImpl implements TaskMatchService {
         if (CollectionUtils.isEmpty(humanObjInfoDO.getSkills())) {
             return new ArrayList<>();
         }
-        List<TaskObjInfoDO> taskObjInfoDOList = this.taskObjMapper.getAllTasks();
+        List<TaskObjInfoDO> taskObjInfoDOList = this.taskObjService.getAllTasks();
         Set<String> skills = getSkills(humanObjInfoDO);
         taskObjInfoDOList = this.filterAll(skills, taskObjInfoDOList);
         synchronized (this.getClass()) {

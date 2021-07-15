@@ -1,6 +1,6 @@
-package service.mapper;
+package com.autonavi.service.mapper;
 
-import domain.TaskObjInfoDO;
+import com.autonavi.domain.TaskObjInfoDO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
  * @author yc.wzl
  * @date 2021/7/14 - 3:36 下午
  */
-
+@Mapper
 public interface TaskObjMapper {
     /**
      * 获取所有任务
