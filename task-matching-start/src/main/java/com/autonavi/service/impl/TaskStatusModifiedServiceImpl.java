@@ -1,10 +1,10 @@
 package com.autonavi.service.impl;
 
 import com.autonavi.domain.TaskObjInfoDO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.autonavi.service.TaskObjService;
 import com.autonavi.service.TaskStatusModifiedService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;

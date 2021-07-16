@@ -3,13 +3,13 @@ package com.autonavi.service.impl;
 
 import com.autonavi.domain.HumanObjInfoDO;
 import com.autonavi.domain.TaskObjInfoDO;
-import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.autonavi.service.TaskMatchService;
 import com.autonavi.service.TaskObjService;
 import com.autonavi.service.TaskStatusModifiedService;
 import com.autonavi.service.util.TaskComparator;
+import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
