@@ -43,7 +43,7 @@ public class TaskMatchServiceImpl implements TaskMatchService {
         taskObjInfoDOList = this.taskStatusModifiedService.setTaskValid(taskObjInfoDOList);
         Map<String, Integer> map = getSkillMap(humanObjInfoDO);
         TaskComparator taskComparator = new TaskComparator(map);
-        Collections.sort(taskObjInfoDOList, taskComparator);
+        taskObjInfoDOList.sort(taskComparator);
         return taskObjInfoDOList;
     }
 
