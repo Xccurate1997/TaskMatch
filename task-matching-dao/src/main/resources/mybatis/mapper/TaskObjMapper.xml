@@ -6,7 +6,7 @@
 
     <!--    List<TaskObjInfoDO> getAllTasks();-->
     <select id="getAllTasks" resultType="com.autonavi.domain.TaskObjInfoDO">
-        select * from task
+        select * from task where valid = 1
     </select>
 
     <!--TaskObjInfoDO getTaskById(Integer id);-->

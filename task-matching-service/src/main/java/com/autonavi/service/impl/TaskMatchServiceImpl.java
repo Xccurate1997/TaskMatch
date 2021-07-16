@@ -27,7 +27,6 @@ public class TaskMatchServiceImpl implements TaskMatchService {
     @Autowired
     private TaskStatusModifiedService taskStatusModifiedService;
 
-    private static final Integer VALID_SIGN = 1;
 
     @Override
     public List<TaskObjInfoDO> match(HumanObjInfoDO humanObjInfoDO) {
@@ -63,19 +62,18 @@ public class TaskMatchServiceImpl implements TaskMatchService {
 
 
     /**
-     * 过滤出所有的有效且能匹配的任务
+     * 过滤出所有能匹配的任务
      *
      * @param skills
      * @param taskObjInfoDOList
      * @return
      */
     private List<TaskObjInfoDO> filterAll(Set<String> skills, List<TaskObjInfoDO> taskObjInfoDOList) {
-        if (CollectionUtils.isEmpty(taskObjInfoDOList)) {
+        if (Objects.isNull(taskObjInfoDOList) || CollectionUtils.isEmpty(taskObjInfoDOList)) {
             return new ArrayList<>();
         }
         List<TaskObjInfoDO> result = taskObjInfoDOList.parallelStream()
                 .filter(taskObjInfoDO -> skills.contains(taskObjInfoDO.getSkill()))
-                .filter(taskObjInfoDO -> VALID_SIGN.equals(taskObjInfoDO.getValid()))
                 .collect(Collectors.toList());
         return result;
     }

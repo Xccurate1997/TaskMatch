@@ -1,9 +1,7 @@
 package com.autonavi.service.util;
 
 
-import com.autonavi.service.ConvertUtil;
 import com.autonavi.domain.TaskObjInfoDO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -17,8 +15,6 @@ import java.util.Map;
  */
 @Service
 public class TaskComparator implements Comparator<TaskObjInfoDO> {
-    @Autowired
-    private ConvertUtil convertUtil;
 
     private Map<String, Integer> map;
 

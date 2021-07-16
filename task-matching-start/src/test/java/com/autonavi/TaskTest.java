@@ -1,24 +1,19 @@
-package com.autonavi.test;
+package com.autonavi;
 
 
-import com.alibaba.excel.EasyExcel;
-import com.autonavi.Application;
 import com.autonavi.domain.HumanObjInfoDO;
 import com.autonavi.domain.TaskObjInfoDO;
-import com.autonavi.service.ConvertUtil;
 import com.autonavi.service.TaskMatchService;
 import com.autonavi.service.TaskObjService;
 import com.taobao.pandora.boot.test.junit4.DelegateTo;
 import com.taobao.pandora.boot.test.junit4.PandoraBootRunner;
 
 
-import com.autonavi.domain.ExcelTaskDataVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import com.autonavi.service.util.TaskExcelListener;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -36,8 +31,6 @@ import java.util.concurrent.CyclicBarrier;
 @RunWith(PandoraBootRunner.class)
 @DelegateTo(SpringJUnit4ClassRunner.class)
 public class TaskTest {
-    @Autowired
-    private ConvertUtil convertUtil;
 
     @Autowired
     TaskObjService taskObjService;
@@ -58,6 +51,7 @@ public class TaskTest {
         List<TaskObjInfoDO> result2 = taskMatchService.match(h2);
         System.out.println("h1领到到任务："+result1);
         System.out.println("h2领到到任务："+result2);
+        System.out.println(taskMatchService.match(null));
     }
 
     @Test
@@ -156,13 +150,18 @@ public class TaskTest {
                 h4.setName("赵六");
                 HumanObjInfoDO.Skill h1Skill = new HumanObjInfoDO.Skill();
                 h1Skill.setSkill("电子眼冗余清洗校正内检");
-                h1Skill.setLevel(2);
+                h1Skill.setLevel(1);
                 HumanObjInfoDO.Skill h1Skill1 = new HumanObjInfoDO.Skill();
                 h1Skill1.setSkill("任务不需要的技能");
                 h1Skill1.setLevel(2);
+                HumanObjInfoDO.Skill h1Skill2 = new HumanObjInfoDO.Skill();
+                h1Skill2.setSkill("电子眼校正（特殊场景）");
+                h1Skill2.setLevel(2);
 
                 List<HumanObjInfoDO.Skill> skillList = new ArrayList<>();
                 skillList.add(h1Skill);
+                skillList.add(h1Skill1);
+                skillList.add(h1Skill2);
                 h4.setSkills(skillList);
 
                 cyclicBarrier.await();
@@ -197,37 +196,42 @@ public class TaskTest {
     @Test
     public void singleHumanTest() {
         HumanObjInfoDO h1 = new HumanObjInfoDO();
-        h1.setName("张三");
+        h1.setName("测试员1");
         HumanObjInfoDO.Skill h1Skill = new HumanObjInfoDO.Skill();
-        h1Skill.setSkill("电子眼校正（特殊场景）");
-        h1Skill.setLevel(1);
+        h1Skill.setSkill("违停罚单定位校正-内检");
+        h1Skill.setLevel(2);
+        HumanObjInfoDO.Skill h1Skill1 = new HumanObjInfoDO.Skill();
+        h1Skill1.setSkill("违停罚单定位校正");
+        h1Skill1.setLevel(1);
+        HumanObjInfoDO.Skill h1Skill2 = new HumanObjInfoDO.Skill();
+        h1Skill2.setSkill("道路缺失大数据流水校正（形状）-内检");
+        h1Skill2.setLevel(1);
+
         List<HumanObjInfoDO.Skill> skillList = new ArrayList<>();
         skillList.add(h1Skill);
+        skillList.add(h1Skill1);
+        skillList.add(h1Skill2);
         h1.setSkills(skillList);
         List<TaskObjInfoDO> result = taskMatchService.match(h1);
+        System.out.println("测试员1领到任务：");
         for (TaskObjInfoDO r : result) {
             System.out.println(r);
         }
     }
 
     @Test
-    public void readTest() {
-        String fileName = "任务数据样例.xlsx";
-        EasyExcel.read(fileName, ExcelTaskDataVO.class, new TaskExcelListener(convertUtil, taskObjService)).sheet().doRead();
-    }
-
-    @Test
     public void importTest() throws SQLException {
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("数据库链接成功");
         System.out.println("数据库："+dataSource.getConnection());
     }
 
     @Test
     public void insertTest() {
         TaskObjInfoDO t = new TaskObjInfoDO();
-        t.setId(200);
-        t.setCity("北京");
+        t.setId(1000);
+        t.setCity("测试城市");
         taskObjService.insertTaskById(t);
+        System.out.println("插入成功!");
     }
 
     @Test
@@ -253,9 +257,10 @@ public class TaskTest {
     @Test
     public void updateTest() {
         List<Integer> idList = new ArrayList<>();
-        idList.add(1);
-        idList.add(2);
-        idList.add(3);
+        idList.add(301);
+        idList.add(302);
+        idList.add(303);
         taskObjService.updateTasksByIdList(idList);
+        System.out.println("更新成功!");
     }
 }
