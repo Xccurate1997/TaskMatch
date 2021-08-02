@@ -28,8 +28,8 @@ public class TaskObjService {
         return taskObjMapper.getTasksByIdList(idList);
     }
 
-    public void updateTaskById(Integer id) {
-        taskObjMapper.updateTaskById(id);
+    public int updateTaskById(Integer id) {
+        return taskObjMapper.updateTaskById(id);
     }
 
     public void updateTasksByIdList(List<Integer> idList) {
@@ -38,5 +38,9 @@ public class TaskObjService {
 
     public void insertTaskById(TaskObjInfoDO taskObjInfoDO) {
         taskObjMapper.insertTaskById(taskObjInfoDO);
+    }
+
+    public List<TaskObjInfoDO> getTasksBySkills(List<String> skills) {
+        return taskObjMapper.getTasksBySkills(skills);
     }
 }

@@ -36,13 +36,12 @@ public class TaskMatchServiceImpl implements TaskMatchService {
         if (Objects.isNull(humanObjInfoDO.getSkills()) || CollectionUtils.isEmpty(humanObjInfoDO.getSkills())) {
             return new ArrayList<>();
         }
-        List<TaskObjInfoDO> taskObjInfoDOList = this.taskObjService.getAllTasks();
-        Set<String> skills = getSkills(humanObjInfoDO);
-        taskObjInfoDOList = this.filterAll(skills, taskObjInfoDOList);
-        taskObjInfoDOList = this.taskStatusModifiedService.setTaskValid(taskObjInfoDOList);
+        List<String> skills = getSkills(humanObjInfoDO);
+        List<TaskObjInfoDO> taskObjInfoDOList = this.taskObjService.getTasksBySkills(skills);
         Map<String, Integer> map = getSkillMap(humanObjInfoDO);
         TaskComparator taskComparator = new TaskComparator(map);
         taskObjInfoDOList.sort(taskComparator);
+        taskObjInfoDOList = this.taskStatusModifiedService.setTaskValid(taskObjInfoDOList);
         return taskObjInfoDOList;
     }
 
@@ -62,33 +61,16 @@ public class TaskMatchServiceImpl implements TaskMatchService {
 
 
     /**
-     * 过滤出所有能匹配的任务
-     *
-     * @param skills
-     * @param taskObjInfoDOList
-     * @return
-     */
-    private List<TaskObjInfoDO> filterAll(Set<String> skills, List<TaskObjInfoDO> taskObjInfoDOList) {
-        if (Objects.isNull(taskObjInfoDOList) || CollectionUtils.isEmpty(taskObjInfoDOList)) {
-            return new ArrayList<>();
-        }
-        List<TaskObjInfoDO> result = taskObjInfoDOList.parallelStream()
-                .filter(taskObjInfoDO -> skills.contains(taskObjInfoDO.getSkill()))
-                .collect(Collectors.toList());
-        return result;
-    }
-
-    /**
      * 获取人的技能
      *
      * @param humanObjInfoDO
      * @return
      */
-    private Set<String> getSkills(HumanObjInfoDO humanObjInfoDO) {
+    private List<String> getSkills(HumanObjInfoDO humanObjInfoDO) {
         if (Objects.isNull(humanObjInfoDO)) {
-            return new HashSet<>();
+            return new ArrayList<>();
         }
-        Set<String> result = new HashSet<>();
+        List<String> result = new ArrayList<>();
         List<HumanObjInfoDO.Skill> list = humanObjInfoDO.getSkills();
         for (HumanObjInfoDO.Skill skill : list) {
            result.add(skill.getSkill());

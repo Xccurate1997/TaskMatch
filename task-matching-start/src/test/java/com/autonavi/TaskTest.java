@@ -255,12 +255,30 @@ public class TaskTest {
     }
 
     @Test
-    public void updateTest() {
-        List<Integer> idList = new ArrayList<>();
-        idList.add(301);
-        idList.add(302);
-        idList.add(303);
-        taskObjService.updateTasksByIdList(idList);
-        System.out.println("更新成功!");
+    public void updateTest() throws InterruptedException {
+        final CountDownLatch latch = new CountDownLatch(100);
+        for (int i = 0; i < 100; i++) {
+            new Thread(() -> {
+                try {
+                    int res = taskObjService.updateTaskById(1);
+                    System.out.println("线程i:" + res);
+                } finally {
+                    latch.countDown();
+                }
+            }).start();
+        }
+        latch.await();
+    }
+
+    @Test
+    public void getTasksBySkills() {
+        List<String> skills = new ArrayList<>();
+        skills.add("电子眼校正（特殊场景）");
+        skills.add("电子眼校正（综合决策）");
+        skills.add("错误技能");
+        List<TaskObjInfoDO> res = taskObjService.getTasksBySkills(skills);
+        for (TaskObjInfoDO re : res) {
+            System.out.println(re);
+        }
     }
 }

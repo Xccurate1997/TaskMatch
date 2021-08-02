@@ -19,7 +19,7 @@ public class TaskStatusModifiedServiceImpl implements TaskStatusModifiedService 
     @Autowired
     private TaskObjService taskObjService;
 
-    private static final Integer VALID_SIGN = 1;
+    private static final int VALID_SIGN = 1;
 
     @Override
     public List<TaskObjInfoDO> setTaskValid(List<TaskObjInfoDO> taskObjInfoDOList) {
@@ -29,12 +29,10 @@ public class TaskStatusModifiedServiceImpl implements TaskStatusModifiedService 
         }
         List<TaskObjInfoDO> result = new ArrayList<>();
         for (Integer id : idList) {
-            synchronized (this.getClass()) {
-                TaskObjInfoDO task = taskObjService.getTaskById(id);
-                if (VALID_SIGN.equals(task.getValid())) {
-                    result.add(task);
-                    taskObjService.updateTaskById(id);
-                }
+            int matchRows = taskObjService.updateTaskById(id);
+            if (matchRows == VALID_SIGN) {
+                TaskObjInfoDO taskObjInfoDO = taskObjService.getTaskById(id);
+                result.add(taskObjInfoDO);
             }
         }
         return result;
